@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/gameLevel.unity
     guid: a419f3277e649324cab198017ff12241
+  - enabled: 1
+    path: Assets/Scenes/Baslangic.unity
+    guid: 0a8034d955416eb4d8a63d7cdccbeb75
   m_configObjects: {}

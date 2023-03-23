@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 12/2
+  m_Text: 
 --- !u!222 &367593337
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -250,6 +250,7 @@ MonoBehaviour:
   kareler: {fileID: 3778240558172518402, guid: 1f5f4e6d48ff93841b75194f55287f66, type: 3}
   karelerPaneli: {fileID: 1824862246}
   sorupaneli: {fileID: 601937858}
+  sorutext: {fileID: 367593336}
 --- !u!1 &482217724
 GameObject:
   m_ObjectHideFlags: 0
