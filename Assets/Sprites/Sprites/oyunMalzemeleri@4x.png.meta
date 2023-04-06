@@ -201,27 +201,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kalp
-      rect:
-        serializedVersion: 2
-        x: 839
-        y: 31
-        width: 379
-        height: 380
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a9be5181707ba6f4ea7206be675114a7
-      internalID: -4666148151360234474
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: oyunMalzemeleri@4x_3
       rect:
         serializedVersion: 2
@@ -284,6 +263,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: oyunMalzemeleri@4x_2
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 31
+        width: 379
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c882e1bbf3cee204f8f1faa456672c51
+      internalID: -89456563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -295,8 +295,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      kalp: -4666148151360234474
       oyunMalzemeleri@4x_3: 7835213880407035759
+      oyunMalzemeleri@4x_2: -89456563
       oyunMalzemeleri@4x_1: -6220210443030218386
       oyunMalzemeleri@4x_0: 4380802985191466148
       oyunMalzemeleri@4x_5: -8300896727939277280
