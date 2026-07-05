@@ -135,6 +135,156 @@
   #go-button:hover {
     transform: translateY(-2px);
   }
+
+  /* Visa application modal */
+  #modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 16, 0.72);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+  }
+
+  #modal-overlay.active {
+    display: flex;
+  }
+
+  #visa-form-card {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #101a33;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 28px 26px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  }
+
+  #modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #f4f6fb;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  #modal-close:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  #form-country-title {
+    margin: 0 26px 20px 0;
+    font-size: 1.3rem;
+    color: #ffb703;
+  }
+
+  .form-row {
+    margin-bottom: 14px;
+  }
+
+  .form-row.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-row label {
+    display: block;
+    font-size: 0.82rem;
+    color: #a9b4cc;
+    margin-bottom: 6px;
+  }
+
+  .form-row input,
+  .form-row select {
+    width: 100%;
+    background: #0b1428;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #f4f6fb;
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+
+  .form-row input:focus,
+  .form-row select:focus {
+    outline: none;
+    border-color: #ff7847;
+  }
+
+  #form-submit {
+    width: 100%;
+    margin-top: 6px;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ff7847, #ffb703);
+    color: #14213d;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  #form-submit:hover {
+    transform: translateY(-2px);
+  }
+
+  #form-success {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  #form-success .success-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: rgba(255, 183, 3, 0.15);
+    color: #ffb703;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #form-success h2 {
+    margin: 0 0 10px;
+    color: #ffb703;
+  }
+
+  #form-success p {
+    color: #a9b4cc;
+    margin: 0 0 22px;
+    line-height: 1.5;
+  }
+
+  #form-reset {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    color: #f4f6fb;
+    padding: 11px 24px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  #form-reset:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
 </style>
 </head>
 <body>
@@ -152,6 +302,72 @@
   <div class="country-name" id="selected-country-name"></div>
   <div class="country-hint">seçildi</div>
   <button id="go-button">Devam Et</button>
+</div>
+
+<div id="modal-overlay">
+  <div id="visa-form-card">
+    <button id="modal-close" type="button" aria-label="Kapat">&times;</button>
+
+    <form id="visa-form">
+      <h2 id="form-country-title">Vize Başvurusu</h2>
+
+      <div class="form-row">
+        <label for="f-ad">Ad</label>
+        <input type="text" id="f-ad" autocomplete="given-name" required>
+      </div>
+
+      <div class="form-row">
+        <label for="f-soyad">Soyad</label>
+        <input type="text" id="f-soyad" autocomplete="family-name" required>
+      </div>
+
+      <div class="form-row">
+        <label for="f-kimlik">T.C. Kimlik No / Pasaport No</label>
+        <input type="text" id="f-kimlik" required>
+      </div>
+
+      <div class="form-row two-col">
+        <div>
+          <label for="f-dogum">Doğum Tarihi</label>
+          <input type="date" id="f-dogum" required>
+        </div>
+        <div>
+          <label for="f-seyahat">Seyahat Tarihi</label>
+          <input type="date" id="f-seyahat" required>
+        </div>
+      </div>
+
+      <div class="form-row two-col">
+        <div>
+          <label for="f-email">E-posta</label>
+          <input type="email" id="f-email" autocomplete="email" required>
+        </div>
+        <div>
+          <label for="f-telefon">Telefon</label>
+          <input type="tel" id="f-telefon" autocomplete="tel" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="f-amac">Seyahat Amacı</label>
+        <select id="f-amac">
+          <option value="turizm">Turizm</option>
+          <option value="is">İş</option>
+          <option value="egitim">Eğitim</option>
+          <option value="diger">Diğer</option>
+        </select>
+      </div>
+
+      <button type="submit" id="form-submit">Başvuruyu Gönder</button>
+    </form>
+
+    <div id="form-success" hidden>
+      <div class="success-icon">&#10003;</div>
+      <h2>Başvurunuz Alındı</h2>
+      <p id="success-detail"></p>
+      <button id="form-reset" type="button">Yeni Başvuru</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -207,9 +423,58 @@
     selectionPanel.classList.add('active');
   });
 
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalClose = document.getElementById('modal-close');
+  const formCountryTitle = document.getElementById('form-country-title');
+  const visaForm = document.getElementById('visa-form');
+  const formSuccess = document.getElementById('form-success');
+  const successDetail = document.getElementById('success-detail');
+  const formReset = document.getElementById('form-reset');
+
+  function openModal() {
+    formCountryTitle.textContent = selectedCountryName.textContent + ' için Vize Başvurusu';
+    visaForm.hidden = false;
+    formSuccess.hidden = true;
+    modalOverlay.classList.add('active');
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+  }
+
   goButton.addEventListener('click', function () {
     if (!selectedCountryID) return;
-    alert('Seçilen ülke: ' + selectedCountryName.textContent);
+    openModal();
+  });
+
+  modalClose.addEventListener('click', closeModal);
+
+  modalOverlay.addEventListener('click', function (event) {
+    if (event.target === modalOverlay) closeModal();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
+  });
+
+  visaForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const basvuruNo = 'VZ-' + selectedCountryID + '-' + Math.floor(100000 + Math.random() * 900000);
+    const ad = document.getElementById('f-ad').value.trim();
+    const soyad = document.getElementById('f-soyad').value.trim();
+
+    successDetail.textContent = ad + ' ' + soyad + ', ' + selectedCountryName.textContent +
+      ' için başvurunuz oluşturuldu. Başvuru numaranız: ' + basvuruNo;
+
+    visaForm.hidden = true;
+    formSuccess.hidden = false;
+  });
+
+  formReset.addEventListener('click', function () {
+    visaForm.reset();
+    visaForm.hidden = false;
+    formSuccess.hidden = true;
   });
 </script>
 
