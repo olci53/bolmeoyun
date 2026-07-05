@@ -398,10 +398,7 @@
   let selectedPath = null;
   let selectedCountryID = null;
 
-  document.getElementById('svgMap').addEventListener('click', function (event) {
-    const path = event.target.closest('.svgMap-country');
-    if (!path) return;
-
+  function selectCountry(path) {
     const countryID = path.getAttribute('data-id');
     if (!countryID) return;
 
@@ -421,7 +418,33 @@
 
     selectedCountryName.textContent = name;
     selectionPanel.classList.add('active');
-  });
+  }
+
+  // svgMap's own touch handling (used for panning/zooming) consumes the
+  // touch sequence before the browser can synthesize a "click" event, so
+  // taps on mobile never reach a click listener. Detecting the tap
+  // ourselves from pointerdown/pointerup (captured before the library can
+  // stop the event) works for both mouse and touch.
+  const svgMapEl = document.getElementById('svgMap');
+  let tapStart = null;
+
+  svgMapEl.addEventListener('pointerdown', function (event) {
+    tapStart = { x: event.clientX, y: event.clientY, time: Date.now() };
+  }, true);
+
+  svgMapEl.addEventListener('pointerup', function (event) {
+    if (!tapStart) return;
+    const dx = event.clientX - tapStart.x;
+    const dy = event.clientY - tapStart.y;
+    const moved = Math.sqrt(dx * dx + dy * dy);
+    const elapsed = Date.now() - tapStart.time;
+    tapStart = null;
+
+    if (moved > 10 || elapsed > 600) return;
+
+    const path = event.target.closest && event.target.closest('.svgMap-country');
+    if (path) selectCountry(path);
+  }, true);
 
   const modalOverlay = document.getElementById('modal-overlay');
   const modalClose = document.getElementById('modal-close');
